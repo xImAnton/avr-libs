@@ -1,17 +1,21 @@
-// #define F_CPU 16000000
 #include "libavr.h"
 
-#define BPS 10
+#define BPS 2 
+
+const uint32_t blinkInterval = 1000 / 5;
 
 int main(void) {
-    const uint32_t blinkSpeed = 1000 / BPS;
     setPinMode(&DDRB, PB0, OUTPUT);
+	setPinMode(&DDRC, PC5, OUTPUT);
 
     while (1) {
         setPin(&PORTB, PB0, HIGH);
-        delay(blinkSpeed);
+		setPin(&PORTC, PC5, LOW);
+        delay(blinkInterval);
+
         setPin(&PORTB, PB0, LOW);
-        delay(blinkSpeed);
+		setPin(&PORTC, PC5, HIGH);
+        delay(blinkInterval);
     }
     return 0;
 }
