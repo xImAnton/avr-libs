@@ -21,12 +21,21 @@ int main(void) {
 	sr_setup(&shift);
 	sr_clear(&shift);
 	setPin(&PORTB, PB0, HIGH);
+	uint8_t state = 0x07;
     while (1) {
-		sr_set(&shift, 0x55);
-		delay(500);
-		sr_shift(&shift);
+		if (state == 7) {
+			sr_set(&shift, 0x01);
+			state = 0x00;
+		} else {
+			sr_shift(&shift);
+			state++;
+		}
+		delay(30);
+		// sr_set(&shift, 0x55);
+		// delay(500);
+		// sr_shift(&shift);
 		// sr_set(&shift, 0xAA);
-		delay(500);
+		// delay(500);
         /* setPin(&PORTB, PB0, HIGH);
 		setPin(&PORTC, PC5, LOW);
         delay(blinkInterval);
