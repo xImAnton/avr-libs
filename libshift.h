@@ -1,5 +1,7 @@
 #include "libavr.h"
 
+#ifndef __libshift_h_included__
+#define __libshift_h_included__
 
 typedef struct {
 	volatile uint8_t *portConfig;
@@ -51,3 +53,4 @@ inline void sr_clear(shift_register_t *shift) {
     sr_set(shift, 0x00);
 }
 
+#endif

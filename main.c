@@ -24,7 +24,8 @@ int main(void) {
     while (1) {
 		sr_set(&shift, 0x55);
 		delay(500);
-		sr_set(&shift, 0xAA);
+		sr_shift(&shift);
+		// sr_set(&shift, 0xAA);
 		delay(500);
         /* setPin(&PORTB, PB0, HIGH);
 		setPin(&PORTC, PC5, LOW);

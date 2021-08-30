@@ -1,8 +1,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#ifndef _libavr_h_include
-#define _libavr_h_include
+#ifndef __libavr_h_included__
+#define __libavr_h_included__
 
 #define OUTPUT 0x1
 #define INPUT 0x0
