@@ -1,2 +1,2 @@
 **/*.inc linguist-language=asm
-/usbdrv linguist-vendored
+/usbdrv/* linguist-vendored
