@@ -1,6 +1,9 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+#ifndef _libavr_h_include
+#define _libavr_h_include
+
 #define OUTPUT 0x1
 #define INPUT 0x0
 #define LOW 0x0
@@ -23,3 +26,8 @@ void setPin(volatile uint8_t *port, uint8_t pin, uint8_t signal) {
     }
 }
 
+uint8_t digitalRead(volatile uint8_t *portIn, uint8_t port) {
+	return *portIn & (1 << port);
+}
+
+#endif

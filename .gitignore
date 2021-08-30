@@ -1,2 +1,4 @@
 *.bin
 *.hex
+test.c
+test
