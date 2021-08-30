@@ -27,7 +27,7 @@ void setPin(volatile uint8_t *port, uint8_t pin, uint8_t signal) {
 }
 
 uint8_t digitalRead(volatile uint8_t *portIn, uint8_t port) {
-	return *portIn & (1 << port);
+    return *portIn & (1 << port);
 }
 
 #endif
