@@ -23,7 +23,7 @@ void sr_setup(shift_register_t *shift) {
 
 inline static void sr_shift(shift_register_t *shift) {
 	setPin(shift->port, shift->clock, HIGH);
-	delay(1);
+	// delay(1);
 	setPin(shift->port, shift->clock, LOW);
 }
 
@@ -41,7 +41,7 @@ inline void sr_enable_strobe(shift_register_t *shift) {
 
 void sr_set(shift_register_t *shift, uint8_t value) {
 	sr_disable_strobe(shift);
-	for (int i = shift->size - 1; i >= 0; --i) {
+	for (int16_t i = shift->size - 1; i >= 0; --i) {
 		setPin(shift->port, shift->data, value & (1 << i));
 		sr_shift(shift);
 		setPin(shift->port, shift->data, LOW);
