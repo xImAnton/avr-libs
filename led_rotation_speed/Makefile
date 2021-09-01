@@ -16,7 +16,7 @@ OBJCOPY=avr-objcopy
 CFLAGS=-Wall -g -Os
 CFLAGS += -mmcu=$(MCU)
 CFLAGS += -D F_CPU=$(F_CPU)
-CFLAGS += -I include/
+CFLAGS += -I ../include/
 
 build:
 	$(CC) $(CFLAGS) -o $(TARGET).bin $(SRCS)

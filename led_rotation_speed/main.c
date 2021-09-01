@@ -10,19 +10,29 @@ shift_register_t shift = {
     .size = 8
 };
 
-volatile uint8_t toggle_state = PIN_LOW;
+volatile int8_t speed = 0;
 
 ISR(INT0_vect) {
-    toggle_state = !toggle_state;
-    pin_set(&PORTC, PC5, toggle_state);
-    pin_set(&PORTB, PB0, !toggle_state);
+    if (speed == 127) {
+        pin_set(&PORTB, PB0, PIN_LOW);
+    }
+    speed -= 1;
 }
+
+ISR(INT1_vect) {
+    if (speed == 127) {
+        pin_set(&PORTB, PB0, PIN_HIGH);
+        return;
+    }
+    speed += 1;
+    pin_set(&PORTB, PB0, PIN_LOW);
+}    
 
 int main(void) {
     pin_set_mode(&DDRC, PC5, PIN_OUTPUT);
     pin_set_mode(&DDRB, PB0, PIN_OUTPUT);
-    pin_set(&PORTB, PB0, PIN_HIGH);
     i_setup(INT0, I_INT0_RISING);
+    i_setup(INT1, I_INT1_RISING);
     sei();
 
     sr_setup(&shift);
@@ -36,10 +46,11 @@ int main(void) {
             sr_shift(&shift);
             state++;
         }
-        if (toggle_state) {
-            delay(300);
+        int16_t to_wait = speed * 10 + 500;
+        if (to_wait < 1) {
+            pin_set(&PORTB, PB0, PIN_HIGH);
         } else {
-            delay(30);
+            delay(speed * 10 + 500);
         }
     }
     return 0;

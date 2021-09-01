@@ -5,22 +5,22 @@
 #ifndef __libavr_h_included__
 #define __libavr_h_included__
 
-#define PIN_OUTPUT 0x1
-#define PIN_INPUT 0x0
-#define PIN_LOW 0x0
-#define PIN_HIGH 0x1
+#define PIN_OUTPUT 0x01
+#define PIN_INPUT 0x00
+#define PIN_LOW 0x00
+#define PIN_HIGH 0x01
 
 #define I_INT0_RISING (1<<ISC01)|(1<<ISC00)
 #define I_INT0_FALLING (1<<ISC01)
 #define I_INT0_CHANGE (1<<ISC00)
-#define I_INT0_LOW 0
+#define I_INT0_LOW 0x00
 
 #define I_INT1_RISING (1<<ISC11)|(1<<ISC01)
 #define I_INT1_FALLING (1<<ISC11)
 #define I_INT1_CHANGE (1<<ISC01)
-#define I_INT1_LOW 0
+#define I_INT1_LOW 0x00
 
-#define delay _delay_ms
+#define delay(ms) { uint32_t t = ms; while (t--) { _delay_ms(1); } };
 
 void pin_set_mode(volatile uint8_t *port, uint8_t pin, uint8_t mode) {
     if (mode) {
