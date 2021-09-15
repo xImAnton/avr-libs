@@ -20,7 +20,7 @@
 #define I_INT1_CHANGE (1<<ISC01)
 #define I_INT1_LOW 0x00
 
-#define delay(ms) { uint32_t t = ms; while (t--) { _delay_ms(1); } };
+#define delay(ms) { uint32_t t = ms; while (t--) { _delay_ms(1); } }
 
 void pin_set_mode(volatile uint8_t *port, uint8_t pin, uint8_t mode) {
     if (mode) {
@@ -47,4 +47,4 @@ inline void i_setup(uint8_t interrupt, uint8_t mode) {
     MCUCR |= mode;
 }
 
-#endif
+#endif // not __libavr_h_included__

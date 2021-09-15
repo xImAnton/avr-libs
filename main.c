@@ -1,5 +1,5 @@
-#include "libavr.h"
-#include "libshift.h"
+#include <libavr.h>
+#include <libshift.h>
 
 shift_register_t shift = { 
     .ddr = &DDRC,
@@ -37,11 +37,10 @@ int main(void) {
             state++;
         }
         if (toggle_state) {
-            delay(300);
+            delay(300)
         } else {
-            delay(30);
+            delay(30)
         }
     }
-    return 0;
 }
 

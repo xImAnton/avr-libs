@@ -1,5 +1,5 @@
-#include "libavr.h"
-#include "libshift.h"
+#include <../include/libavr.h>
+#include <../include/libshift.h>
 
 shift_register_t shift = { 
     .ddr = &DDRC,
@@ -50,9 +50,7 @@ int main(void) {
         if (to_wait < 1) {
             pin_set(&PORTB, PB0, PIN_HIGH);
         } else {
-            delay(speed * 10 + 500);
+            delay(to_wait);
         }
     }
-    return 0;
 }
-

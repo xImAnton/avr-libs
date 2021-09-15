@@ -5,15 +5,15 @@ MCU=atmega8
 F_CPU=16000000 # 16 MHz
 
 # output file name
-TARGET=main
+TARGET=led_rotation_speed
 
 # source files to compile
-SRCS=main.c
+SRCS=led_rotation_speed.c
 
 CC=avr-gcc
 SIZE=avr-size
 OBJCOPY=avr-objcopy
-CFLAGS=-Wall -g -Os
+CFLAGS=-Wall -g -Os -std=c99
 CFLAGS += -mmcu=$(MCU)
 CFLAGS += -D F_CPU=$(F_CPU)
 CFLAGS += -I ../include/
@@ -31,4 +31,3 @@ all:
 	$(MAKE) flash
 clean:
 	rm -f *.bin *.hex
-

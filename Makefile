@@ -13,7 +13,7 @@ SRCS=main.c
 CC=avr-gcc
 SIZE=avr-size
 OBJCOPY=avr-objcopy
-CFLAGS=-Wall -g -Os
+CFLAGS=-Wall -g -Os -std=c99
 CFLAGS += -mmcu=$(MCU)
 CFLAGS += -D F_CPU=$(F_CPU)
 CFLAGS += -I include/
@@ -31,4 +31,3 @@ all:
 	$(MAKE) flash
 clean:
 	rm -f *.bin *.hex
-

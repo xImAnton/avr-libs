@@ -53,4 +53,4 @@ inline void sr_clear(shift_register_t *shift) {
     sr_set(shift, 0x00);
 }
 
-#endif
+#endif // not __libshift_h_included__
