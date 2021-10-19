@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "WinAVR",
+            "includePath": [
+                "${default}",
+                "include"
+            ],
+            "windowsSdkVersion": "10.0.19041.0",
+            "compilerPath": "C:\\WinAVR-20100110\\bin\\avr-gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "defines": [
+                "__AVR_ATmega8__"
+            ]
+        }
+    ],
+    "version": 4
+}

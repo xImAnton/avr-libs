@@ -10,23 +10,23 @@
 #define PIN_LOW 0x00
 #define PIN_HIGH 0x01
 
-#define I_INT0_RISING (1<<ISC01)|(1<<ISC00)
-#define I_INT0_FALLING (1<<ISC01)
-#define I_INT0_CHANGE (1<<ISC00)
+#define I_INT0_RISING ((1 << ISC01) | (1 << ISC00))
+#define I_INT0_FALLING (1 << ISC01)
+#define I_INT0_CHANGE (1 << ISC00)
 #define I_INT0_LOW 0x00
 
-#define I_INT1_RISING (1<<ISC11)|(1<<ISC01)
-#define I_INT1_FALLING (1<<ISC11)
-#define I_INT1_CHANGE (1<<ISC01)
+#define I_INT1_RISING ((1 << ISC11) | (1 << ISC01))
+#define I_INT1_FALLING (1 << ISC11)
+#define I_INT1_CHANGE (1 << ISC01)
 #define I_INT1_LOW 0x00
 
 #define delay(ms) { uint32_t t = ms; while (t--) { _delay_ms(1); } }
 
-void pin_set_mode(volatile uint8_t *port, uint8_t pin, uint8_t mode) {
+void pin_set_mode(volatile uint8_t *ddr, uint8_t pin, uint8_t mode) {
     if (mode) {
-        *port |= (1 << pin);
+        *ddr |= (1 << pin);
     } else {
-        *port &= ~(1 << pin);
+        *ddr &= ~(1 << pin);
     }
 }
 

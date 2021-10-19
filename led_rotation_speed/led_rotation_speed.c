@@ -1,7 +1,7 @@
 #include <../include/libavr.h>
 #include <../include/libshift.h>
 
-shift_register_t shift = { 
+shift_register_t shift = {
     .ddr = &DDRC,
     .port = &PORTC,
     .use_strobe = 0,
