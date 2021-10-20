@@ -85,9 +85,11 @@ typedef struct {
     shift_register_t *shift2;
     uint8_t common_cathode;
     ledm_letter_t current_state;
+    ledm_letter_t last_state;
 } ledm_t;
 
 void ledm_set(ledm_t *matrix, ledm_letter_t l) {
+    matrix->last_state = matrix->current_state;
     matrix->current_state = l;
 
     if (!matrix->common_cathode) {
@@ -129,7 +131,7 @@ uint8_t ledm_letter_width(ledm_letter_t letter) {
     return 0;
 }
 
-void ledm_show_word_rotating(ledm_t *matrix, ledm_letter_t letters[], uint32_t word_size, uint32_t letter_delay, uint8_t direction, uint8_t ignore_whitespace) {
+void ledm_show_word_rotating(ledm_t* matrices[], uint8_t matrix_count, ledm_letter_t letters[], uint32_t word_size, uint32_t letter_delay, uint8_t direction, uint8_t ignore_whitespace) {
     uint32_t letter_count = word_size / sizeof(ledm_letter_t);
 
     for (uint32_t current_letter_i = 0; current_letter_i < letter_count; current_letter_i++) {
@@ -152,6 +154,8 @@ void ledm_show_word_rotating(ledm_t *matrix, ledm_letter_t letters[], uint32_t w
 
             ledm_letter_t new_state;
 
+            ledm_t* matrix = matrices[matrix_count - 1];
+
             if (direction) {
                 new_state = ledm_insert_letter_row_r(matrix->current_state, row);
             }
@@ -160,6 +164,21 @@ void ledm_show_word_rotating(ledm_t *matrix, ledm_letter_t letters[], uint32_t w
             }
 
             ledm_set(matrix, new_state);
+
+            for (int8_t m = matrix_count - 2; m >= 0; m--) {
+                matrix = matrices[m];
+
+                if (direction) {
+                    row = ledm_letter_row_r(matrices[m + 1]->last_state, 0);
+                    new_state = ledm_insert_letter_row_r(matrix->current_state, row);
+                } else {
+                    row = ledm_letter_row_l(matrices[m + 1]->last_state, 0);
+                    new_state = ledm_insert_letter_row_l(matrix->current_state, row);
+                }
+
+                ledm_set(matrix, new_state);                
+            }
+            
             delay(letter_delay);
         }
     }

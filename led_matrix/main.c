@@ -48,6 +48,8 @@ ledm_t matrix2 = {
     .shift2 = &s4
 };
 
+ledm_t* matrices[] = {&matrix2, &matrix1};
+
 ledm_letter_t ximantonde[] = {LEDM_X, LEDM_I, LEDM_M, LEDM_A, LEDM_N, LEDM_T, LEDM_O, LEDM_N, LEDM_DOT, LEDM_D, LEDM_E, LEDM_SPACE};
 
 int main(void) {
@@ -61,7 +63,7 @@ int main(void) {
     sr_clear(&s4);
 
     while (1) {
-        ledm_show_word_rotating(&matrix1, ledm_word(ximantonde), 250, LEDM_LEFT, 1);
+        ledm_show_word_rotating(matrices, sizeof(matrices) / sizeof(ledm_t*), ledm_word(ximantonde), 250, LEDM_LEFT, 1);
     }
 
     return 0;
