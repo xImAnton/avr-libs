@@ -84,11 +84,13 @@ typedef struct {
     shift_register_t *shift1;
     shift_register_t *shift2;
     uint8_t common_cathode;
+    ledm_letter_t current_state;
 } ledm_t;
 
 void ledm_set(ledm_t *matrix, ledm_letter_t l) {
-    if (!matrix->common_cathode) {
+    matrix->current_state = l;
 
+    if (!matrix->common_cathode) {
         l = ~l;
     }
 
@@ -129,7 +131,6 @@ uint8_t ledm_letter_width(ledm_letter_t letter) {
 
 void ledm_show_word_rotating(ledm_t *matrix, ledm_letter_t letters[], uint32_t word_size, uint32_t letter_delay, uint8_t direction, uint8_t ignore_whitespace) {
     uint32_t letter_count = word_size / sizeof(ledm_letter_t);
-    ledm_letter_t current_display = 0;
 
     for (uint32_t current_letter_i = 0; current_letter_i < letter_count; current_letter_i++) {
         ledm_letter_t current_letter = letters[current_letter_i];
@@ -149,14 +150,16 @@ void ledm_show_word_rotating(ledm_t *matrix, ledm_letter_t letters[], uint32_t w
                 row = 0;
             }
 
+            ledm_letter_t new_state;
+
             if (direction) {
-                current_display = ledm_insert_letter_row_r(current_display, row);
+                new_state = ledm_insert_letter_row_r(matrix->current_state, row);
             }
             else {
-                current_display = ledm_insert_letter_row_l(current_display, row);
+                new_state = ledm_insert_letter_row_l(matrix->current_state, row);
             }
 
-            ledm_set(matrix, current_display);
+            ledm_set(matrix, new_state);
             delay(letter_delay);
         }
     }
