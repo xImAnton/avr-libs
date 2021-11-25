@@ -38,9 +38,8 @@ void pin_set(volatile uint8_t *port, uint8_t pin, uint8_t signal) {
     }
 }
 
-uint8_t pin_read(volatile uint8_t *portIn, uint8_t port) {
-    return *portIn & (1 << port);
-}
+#define pin_read(pin_register, pin) (pin_register & (1 << pin))
+#define pin_read_bit(pin_register, pin) ((pin_register & (1 << pin)) >> pin)
 
 inline void i_setup(uint8_t interrupt, uint8_t mode) {
     GICR |= ( 1 << interrupt );

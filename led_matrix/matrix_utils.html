@@ -89,7 +89,7 @@
                 letters.push(`LEDM_${subs[inputStr[i]] || inputStr[i].toUpperCase()}`)
             }
 
-            wordOutput.textContent = `ledm_letter_t ${inputStr.replaceAll(/[^A-Za-z]+/g, "").toLowerCase() || "word"}[] = {${letters.join(", ")}};`
+            wordOutput.textContent = `ledm_letter_t ${inputStr.replaceAll(/[^A-Za-z]+/g, "").toLowerCase() || "word"}[] = {${letters.join(", ")}}; // ${inputStr.toUpperCase()}`
         })
     </script>
 </body>
