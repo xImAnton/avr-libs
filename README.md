@@ -14,3 +14,6 @@ Library for dealing with shift registers.
 ## Goal
 I'm doing this to get familiar with microcontroller and low level programming.
 The big goal is for me to create a device with an Atmega8 that lets you control a LED lightstrip from your computer via USB.
+
+## Resources
+[Fuse Bit Calculator](http://eleccelerator.com/fusecalc/fusecalc.php)
