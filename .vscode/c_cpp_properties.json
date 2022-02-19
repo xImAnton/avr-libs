@@ -12,7 +12,8 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "gcc-arm",
             "defines": [
-                "__AVR_ATmega8__"
+                /*"__AVR_ATmega8__"*/
+                "__AVR_ATmega16A__"
             ]
         }
     ],
