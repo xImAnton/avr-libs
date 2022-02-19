@@ -3,6 +3,8 @@
 #ifndef __libshift_h_included__
 #define __libshift_h_included__
 
+#define SR_SIZE_8 .size = 8,
+
 typedef struct {
     volatile uint8_t *ddr;
     volatile uint8_t *port;
