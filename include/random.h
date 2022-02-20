@@ -1,5 +1,8 @@
 #include <libavr.h>
 
+#ifndef __random_h_included__
+#define __random_h_included__
+
 typedef struct {
   uint32_t a;
 } rand_state_t;
@@ -31,3 +34,5 @@ long map(long x, long in_min, long in_max, long out_min, long out_max) {
 uint32_t rand_range(rand_state_t* state, uint32_t lower, uint32_t upper) {
     return map(rand_xorshift32(state), 0, 4294967295, lower, upper);
 }
+
+#endif // not __random_h_included__
