@@ -1,19 +1,31 @@
-# avrstuff
-random programs that i coded for an atmega8
+# avr-libs
+My libraries for easier AVR development
 
-## main.c
-Testing file for the program that I currently build. May change over time.
-If I build something useful, it will be copied over to a separate file and I will provide a circiut diagram.
-
-## libavr.h
+## include/libavr.h
 Small lib for abstraction of port and pin byte operations.
 
-## libshift.h
+## include/libshift.h
 Library for dealing with shift registers.
 
-## Goal
-I'm doing this to get familiar with microcontroller and low level programming.
-The big goal is for me to create a device with an Atmega8 that lets you control a LED lightstrip from your computer via USB.
+## include/event.h
+Event buffer pushing and polling abstractions.
+
+## include/notes.h
+ICR values for AVR micro controllers to play sound using PWM
+
+## include/random.h
+PRNG that can be seeded using noise from an ADC port.
+
+## include/led_matrix.h
+Abstractions for controlling single 4x4 LED matrices that are connected
+to the AVR-Chip via shift registers.
+
+## include/led_screen.h
+Abstractions for using a grid of LED matrices as a screen with individually
+addressable pixels.
+
+## examples
+Small examples that are not worth a new repository.
 
 ## Resources
 [Fuse Bit Calculator](http://eleccelerator.com/fusecalc/fusecalc.php)

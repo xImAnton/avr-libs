@@ -28,6 +28,12 @@ void screen_clear(screen_t* s, uint8_t x, uint8_t y) {
     ledm_set(matrix, matrix->current_state & ~screen_inner_matrix_pos(x, y));
 }
 
+void screen_clear_row(screen_t *s, uint8_t y) {
+    for (uint8_t x = 0; x < s->width; x++) {
+        screen_clear(s, x, y);
+    }
+}
+
 uint8_t screen_is_set(screen_t* s, uint8_t x, uint8_t y) {
     if (x >= (s->width * 4)) {
         return 1;

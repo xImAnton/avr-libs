@@ -17,7 +17,6 @@ void rand_seed_adc(rand_state_t* state, uint8_t channel) {
     state->a = out;
 }
 
-/* The state word must be initialized to non-zero */
 uint32_t rand_xorshift32(rand_state_t* state) {
 	/* Algorithm "xor" from p. 4 of Marsaglia, "Xorshift RNGs" */
 	uint32_t x = state->a;

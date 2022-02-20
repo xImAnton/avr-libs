@@ -1,6 +1,2 @@
-*.bin
-*.hex
-test.c
-test
-/led_matrix/test.py
-/tetris/**
+**/*.bin
+**/*.hex
