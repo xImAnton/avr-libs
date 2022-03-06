@@ -84,6 +84,7 @@ typedef struct {
     shift_register_t *shift1;
     shift_register_t *shift2;
     uint8_t common_cathode;
+    uint8_t dry_mode;
     ledm_letter_t current_state;
     ledm_letter_t last_state;
 } ledm_t;
@@ -91,6 +92,8 @@ typedef struct {
 void ledm_set(ledm_t *matrix, ledm_letter_t l) {
     matrix->last_state = matrix->current_state;
     matrix->current_state = l;
+
+    if (matrix->dry_mode) return;
 
     if (!matrix->common_cathode) {
         l = ~l;
@@ -100,9 +103,9 @@ void ledm_set(ledm_t *matrix, ledm_letter_t l) {
     sr_set(matrix->shift2, l >> 8);
 }
 
-inline void ledm_clear(ledm_t *matrix){
-    ledm_set(matrix, 0);
-}
+#define ledm_clear(matrix) ledm_set((matrix), 0)
+#define ledm_enable_dry_mode(matrix) (matrix)->dry_mode = 1
+#define ledm_disable_dry_mode(matrix) (matrix)->dry_mode = 0
 
 static inline void ledm_time(ledm_t *matrix, uint32_t letter_delay, uint32_t empty_delay) {
     delay(letter_delay);

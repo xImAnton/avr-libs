@@ -34,6 +34,18 @@ void screen_clear_row(screen_t *s, uint8_t y) {
     }
 }
 
+void screen_enable_dry_mode(screen_t *s) {
+    for (uint8_t i = 0; i < s->width * s->height; i++) {
+        ledm_enable_dry_mode(s->matrices[i]);
+    }
+}
+
+void screen_disable_dry_mode(screen_t *s) {
+    for (uint8_t i = 0; i < s->width * s->height; i++) {
+        ledm_disable_dry_mode(s->matrices[i]);
+    }
+}
+
 uint8_t screen_is_set(screen_t* s, uint8_t x, uint8_t y) {
     if (x >= (s->width * 4)) {
         return 1;
