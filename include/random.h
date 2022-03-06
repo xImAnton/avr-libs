@@ -26,12 +26,17 @@ uint32_t rand_xorshift32(rand_state_t* state) {
 	return state->a = x;
 }
 
-long map(long x, long in_min, long in_max, long out_min, long out_max) {
-    return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
-}
+#ifdef RANDOM_USE_DEFAULT
 
-uint32_t rand_range(rand_state_t* state, uint32_t lower, uint32_t upper) {
-    return map(rand_xorshift32(state), 0, 4294967295, lower, upper);
-}
+#ifndef RANDOM_DEFAULT_ADC_CHANNEL
+#define RANDOM_DEFAULT_ADC_CHANNEL 0
+#endif
+
+rand_state_t RAND_STATE = {};
+
+#define srand_adc() rand_seed_adc(&RAND_STATE, RANDOM_DEFAULT_ADC_CHANNEL)
+#define rand() rand_xorshift32(&RAND_STATE)
+
+#endif // RANDOM_USE_DEFAULT
 
 #endif // not __random_h_included__
